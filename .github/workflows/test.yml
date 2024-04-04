@@ -1,4 +1,10 @@
-name: bun-types
+name: Tests
+
+on:
+  push:
+    branches:
+      - master
+
 jobs:
   build:
     name: build-app
