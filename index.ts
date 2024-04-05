@@ -46,8 +46,10 @@ export const parseConvars = async (data: string, type: 'csv'|'json' = 'csv') => 
   convars.forEach(convar => {   
     var address = convar.match(/0x[0-9A-F]{16}/)[0];
     // Match the first set of quotes
-    var name = convar.match(/"(.*?)"(?=\s*-\s*)/g)?.[0];
-    var value = convar.match(/"(.*?)"(?=\s*-\s*)/g)?.[1];
+    var nameAndValue = convar.match(/"([^"]+)"\s+"([^"]+)"\s+-/s);
+    var name = nameAndValue?.[1];
+    if (!name) name = convar.match(/".*?"/g)[0].slice(1, -1);
+    var value = nameAndValue?.[2];
     if(!value) value = "";
     var endAddress = convar.match(/0x[0-9A-F]{8}$/)[0];
     var description = `"${convar.match(/- (.*?)0x[a-fA-F0-9]{8}/gs)[0]}"`;
@@ -55,10 +57,10 @@ export const parseConvars = async (data: string, type: 'csv'|'json' = 'csv') => 
     if (type === 'json') {
       data.push({
         address: address,
-        name: name.replace(/"/g, ''),
-        value: value.replace(/"/g, ''),
+        name: name,
+        value: value,
         description: description,
-        end_adress:endAddress,
+        end_address:endAddress,
       });
     }
     else {
