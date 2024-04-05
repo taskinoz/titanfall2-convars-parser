@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: build-app
+    name: test-parser
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -16,5 +16,5 @@ jobs:
         uses: oven-sh/setup-bun@v1
       - name: Install dependencies
         run: bun install
-      - name: Test app
+      - name: Run tests
         run: bun test
