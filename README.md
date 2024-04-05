@@ -1,5 +1,7 @@
 # Titanfall 2 Convars Parser
+
 ![Test Status](https://github.com/taskinoz/titanfall2-convars-parser/actions/workflows/test.yml/badge.svg)
+
 Parse the list of Titanfall 2 convars found at https://pastebin.com/raw/3DSCK09f
 
 To install dependencies:
